@@ -7,22 +7,42 @@ import Diagramma from "./Pages/Diagramma";
 import Statistika from "./Pages/Statistika";
 import Qoshish from "./Pages/Qo'shish";
 import Users from "./Pages/Users";
+import Page404 from "./Pages/404page";
+import Login from "./Pages/Loginpage";
+import { createContext, useState } from "react";
+
+const LoginContext = createContext({ isLogin: false, setLogin: () => {} });
 
 function App() {
+  const [isLogin, setLogin] = useState(false);
+  console.log(isLogin);
+
   return (
     <Router>
-       <Routes>
-        <Route path="/" element={<Welcome/>}/>
-        <Route path="/dashboard" element={<Dashboard/>}/>
-        <Route path="/dashboard/products" element={<Products/>}/>
-        <Route path="/dashboard/diagramma" element={<Diagramma/>}/>
-        <Route path="/dashboard/statistika" element={<Statistika/>}/>
-        <Route path="/dashboard/qoshish" element={<Qoshish/>}/>
-        <Route path="/dashboard/users" element={<Users/>}/>
+      <LoginContext.Provider value={{ isLogin, setLogin }}>
+        <Routes>
+          <Route path="/" element={<Welcome />} />
+              <Route path="/login" element={<Login />}></Route>
+          {!isLogin ? (
+            <>
+              
+            </>
+          ) : (
+            <>
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/dashboard/products" element={<Products />} />
+              <Route path="/dashboard/diagramma" element={<Diagramma />} />
+              <Route path="/dashboard/statistika" element={<Statistika />} />
+              <Route path="/dashboard/qoshish" element={<Qoshish />} />
+              <Route path="/dashboard/users" element={<Users />} />
+            </>
+          )}
 
-       </Routes>
+          <Route path="*" element={<Page404 />}></Route>
+        </Routes>
+      </LoginContext.Provider>
     </Router>
   );
 }
-
+export { LoginContext };
 export default App;
