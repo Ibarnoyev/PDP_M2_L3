@@ -26,18 +26,14 @@ function App() {
           <Routes>
             <Route path="/" element={<Welcome />} />
             <Route path="/login" element={<Login />}></Route>
-            {!isLogin ? (
-              <></>
-            ) : (
-              <>
+            
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/dashboard/products" element={<Products />} />
                 <Route path="/dashboard/diagramma" element={<Diagramma />} />
                 <Route path="/dashboard/statistika" element={<Statistika />} />
                 <Route path="/dashboard/qoshish" element={<Qoshish />} />
                 <Route path="/dashboard/users" element={<Users />} />
-              </>
-            )}
+           
 
             <Route path="*" element={<Page404 />}></Route>
           </Routes>

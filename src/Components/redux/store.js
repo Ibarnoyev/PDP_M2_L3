@@ -1,23 +1,9 @@
-import { createStore } from 'redux';
-
-
-const initialState = {
-    meals : [{title : "Osh", have:false}]
-};
-
-const reducer = (state = initialState, action) =>{
-    console.log(action);
-
-    return state;
-
-};
-
-const initialState2={
-    photoUrl: [{image:true, action: false}]
-}
-
-const store2= createStore(reducer)
+import { createStore } from "redux";
+import reducer from "./reducer";
 
 const store = createStore(reducer);
+console.log(store);
 
-export default store
+const dispatch = store.dispatch;
+export{dispatch}
+export default store;

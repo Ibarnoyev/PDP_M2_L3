@@ -1,24 +1,35 @@
 import React, { useState } from "react";
 import DashboardTemplete from "../../Components/DashboardTemplete";
 import { Table, Tab, Tabs } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { addNew as addNewAction, removeTask } from "../../Components/redux/actions";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash } from "@fortawesome/free-solid-svg-icons/faTrash";
 
 export default function Qoshish() {
   const button1 = <button className="btn btn-warning">Kategoriya</button>;
   const button2 = <button className="btn ">Taom</button>;
   const button3 = <button className="btn ">Taomlar ro'yxati</button>;
 
-  const tasks = useSelector((state) => state.tasks);
   const dispatch = useDispatch();
   const [value, setValue] = useState("Taom nomi");
   const [image, setImage] = useState("");
   const [price, setPrice] = useState("");
+  const [tableData, setTableData] = useState([]);
 
-  const handleClick = () => {
-    dispatch({ type: "ADD_NEW_MEAL", payload: value });
-    dispatch({ type: "ADD_NEW_PICTURE", payload: image });
-    dispatch({type:"ADD_NEW_PRICE", payload: price})
+  const addNew1 = () => {
+    if (value.trim() === "") return;
+    const newRow = { value, image, price };
+    setTableData([...tableData, newRow]);
+    addNewAction(value, image, price, dispatch);
+    setValue("");
+    setImage("");
+    setPrice("");
   };
+
+  const handleRemoveTask = (index) =>{
+    removeTask(index);
+  }
 
   return (
     <DashboardTemplete>
@@ -33,6 +44,7 @@ export default function Qoshish() {
                   type="text"
                   placeholder="Kategoriya nomi"
                   className="form-control mb-4"
+                  disabled
                 />
               </div>
               <div className="text-center button1">
@@ -59,12 +71,10 @@ export default function Qoshish() {
                 </div>
               </div>
               <div className="py-5">
-                <input
-                  type="text"
+                <textarea
                   placeholder="Ta'rif"
-                  style={{ width: "1200px", height: "197px", top: "398px" }}
+                  style={{ width: "100%", height: "197px" }}
                   className="form-control"
-
                 />
               </div>
               <div className="d-flex justify-content-between">
@@ -92,7 +102,7 @@ export default function Qoshish() {
                 <button
                   className="btn btn-warning"
                   style={{ width: "200px" }}
-                  onClick={handleClick}
+                  onClick={addNew1}
                 >
                   Qo'shish
                 </button>
@@ -109,12 +119,15 @@ export default function Qoshish() {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>1</td>
-                    <td>{value}</td>
-                    <td>{image}</td>
-                    <td>{price}</td>
-                  </tr>
+                  {tableData.map((row, index) => (
+                    <tr key={index}>
+                      <td>{index + 1}</td>
+                      <td>{row.value}</td>
+                      <td>{row.image}</td>
+                      <td>{row.price}</td>
+                      <FontAwesomeIcon icon={faTrash} className="btn btn-danger" onClick={() => handleRemoveTask(index)}/>
+                    </tr>
+                  ))}
                 </tbody>
               </Table>
             </Tab>

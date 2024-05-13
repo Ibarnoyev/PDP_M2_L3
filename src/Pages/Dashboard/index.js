@@ -9,6 +9,8 @@ export default function Dashboard() {
   console.log(searchParams, setSearchParams);
 
   console.log(searchParams.get("filter"));
+
+  
   return (
     <DashboardTemplete>
       <p className="h3">Arizalar</p>
