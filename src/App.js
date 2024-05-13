@@ -33,8 +33,7 @@ function App() {
                 <Route path="/dashboard/statistika" element={<Statistika />} />
                 <Route path="/dashboard/qoshish" element={<Qoshish />} />
                 <Route path="/dashboard/users" element={<Users />} />
-           
-
+             
             <Route path="*" element={<Page404 />}></Route>
           </Routes>
         </LoginContext.Provider>
