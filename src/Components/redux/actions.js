@@ -1,6 +1,11 @@
-import { type } from "@testing-library/user-event/dist/type";
 import { dispatch } from "./store";
-import { ADD_NEW_MEAL, ADD_NEW_PICTURE, ADD_NEW_PRICE, REMOVE_MEAL } from "./types";
+import {
+  ADD_NEW_MEAL,
+  ADD_NEW_PICTURE,
+  ADD_NEW_PRICE,
+  EDIT_TASK,
+  REMOVE_MEAL,
+} from "./types";
 
 export const addNew = (value, image, price) => {
   dispatch({ type: ADD_NEW_MEAL, payload: value });
@@ -8,7 +13,17 @@ export const addNew = (value, image, price) => {
   dispatch({ type: ADD_NEW_PRICE, payload: price });
 };
 
-export const removeTask = (index) =>{
+export const removeTask = (index) => {
+    return {
+      type: REMOVE_MEAL,
+      payload: index,
+    };
+  };
 
-    dispatch({type:REMOVE_MEAL, payload:index});
-}
+  export const editTask = (index, title) => {
+    return {
+      type: EDIT_TASK,
+      payload: { index, title }
+    };
+  };
+  

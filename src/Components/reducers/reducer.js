@@ -2,8 +2,9 @@ import {
   ADD_NEW_MEAL,
   ADD_NEW_PICTURE,
   ADD_NEW_PRICE,
+  EDIT_TASK,
   REMOVE_MEAL,
-} from "./types";
+} from "../redux/types";
 
 const initialState = {
   meals: [{ title: "Osh", have: false }],
@@ -11,6 +12,7 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   console.log(action);
+  let meals
   switch (action.type) {
     case ADD_NEW_MEAL:
       return {
@@ -27,14 +29,23 @@ const reducer = (state = initialState, action) => {
         ...state,
         meals: [...state.meals, { title: action.payload, have: true }],
       };
+    // Reducer
     case REMOVE_MEAL:
-      const meals = [...state.meals];
-      meals.splice(action.payload, 1);
+      const updatedMeals = state.meals.filter(
+        (_, mealIndex) => mealIndex !== action.payload
+      );
+      return {
+        ...state,
+        meals: updatedMeals,
+      };
+
+    case EDIT_TASK:
+      meals = [...state.meals];
+      meals = [action.payload.index].title = action.payload.title;
       return { ...state, meals };
+
     default:
       return state;
   }
-
-  return state;
 };
 export default reducer;

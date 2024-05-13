@@ -2,11 +2,23 @@ import React, { useState } from "react";
 import DashboardTemplete from "../../Components/DashboardTemplete";
 import { Table, Tab, Tabs } from "react-bootstrap";
 import { useDispatch } from "react-redux";
-import { addNew as addNewAction, removeTask } from "../../Components/redux/actions";
+import {
+  addNew as addNewAction,
+  editTask,
+  removeTask,
+} from "../../Components/redux/actions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash } from "@fortawesome/free-solid-svg-icons/faTrash";
-
+import { faTrash, faEdit } from "@fortawesome/free-solid-svg-icons";
+import { faPen } from "@fortawesome/free-solid-svg-icons/faPen";
 export default function Qoshish() {
+
+  const save = () =>{
+    editTask(text);
+    setEdit(false)
+  }
+  const [isEdit, setEdit] = useState(false);
+  const [text, setText] = useState("");
+
   const button1 = <button className="btn btn-warning">Kategoriya</button>;
   const button2 = <button className="btn ">Taom</button>;
   const button3 = <button className="btn ">Taomlar ro'yxati</button>;
@@ -27,9 +39,15 @@ export default function Qoshish() {
     setPrice("");
   };
 
-  const handleRemoveTask = (index) =>{
-    removeTask(index);
-  }
+  const handleRemoveTask = (index) => {
+    dispatch(removeTask(index)); // Dispatch removeTask action
+  };
+
+  const handleEditClick = (index) => {
+    const mealToEdit = tableData[index];
+    setText(mealToEdit.value);
+    setEdit(true); // Set isEdit to true when edit button is clicked
+  };
 
   return (
     <DashboardTemplete>
@@ -116,16 +134,47 @@ export default function Qoshish() {
                     <th>Taom nomi</th>
                     <th>Rasm (url)</th>
                     <th>narxi</th>
+                    <th>Actions</th>
                   </tr>
                 </thead>
                 <tbody>
                   {tableData.map((row, index) => (
                     <tr key={index}>
                       <td>{index + 1}</td>
-                      <td>{row.value}</td>
+                      <td>
+                        {isEdit ? (
+                          <input
+                            type="text"
+                            value={text}
+                            onChange={(e) => setText(e.target.value)}
+                          />
+                        ) : (
+                          row.value
+                        )}
+                      </td>
                       <td>{row.image}</td>
                       <td>{row.price}</td>
-                      <FontAwesomeIcon icon={faTrash} className="btn btn-danger" onClick={() => handleRemoveTask(index)}/>
+                      <td>
+                        {!isEdit ? (
+                          <FontAwesomeIcon
+                            icon={faEdit}
+                            className="btn btn-warning me-2 ms-2"
+                            onClick={() => handleEditClick(index)}
+                          />
+                        ) : (
+                          <FontAwesomeIcon
+                            icon={faPen}
+                            className="btn btn-success"
+                            onClick={() => save(index)}
+                          />
+                        )}
+
+                        <FontAwesomeIcon
+                          icon={faTrash}
+                          className="btn btn-danger me-2 ms-2"
+                          onClick={() => handleRemoveTask(index)}
+                        />
+                      </td>
                     </tr>
                   ))}
                 </tbody>
