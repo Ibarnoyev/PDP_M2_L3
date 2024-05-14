@@ -2,15 +2,9 @@ import React from "react";
 import DashboardTemplete from "../../Components/DashboardTemplete";
 import { useSearchParams } from "react-router-dom";
 
-
-
 export default function Dashboard() {
   const [searchParams, setSearchParams] = useSearchParams();
-  console.log(searchParams, setSearchParams);
 
-  console.log(searchParams.get("filter"));
-
-  
   return (
     <DashboardTemplete>
       <p className="h3">Arizalar</p>

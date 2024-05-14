@@ -6,23 +6,37 @@ import { faTrash } from "@fortawesome/free-solid-svg-icons/faTrash";
 import { useSearchParams } from "react-router-dom";
 
 const users = [
-  { id: 1, phone: "+99893 158 08 06", name: "Tursunkhujaev Toyirkhuja", role: "Admin" },
-  { id: 2, phone: "+99893 158 08 06", name: "Abdulaziz Ochilov", role: "Foydalanuvchi" },
+  {
+    id: 1,
+    phone: "+99893 158 08 06",
+    name: "Tursunkhujaev Toyirkhuja",
+    role: "Admin",
+  },
+  {
+    id: 2,
+    phone: "+99893 158 08 06",
+    name: "Abdulaziz Ochilov",
+    role: "Foydalanuvchi",
+  },
   { id: 3, phone: "+99893 158 08 06", name: "Mehriddin", role: "Yetkazuvchi" },
-  { id: 4, phone: "+99893 158 08 06", name: "Barnoyev Ramziddin", role: "Foydalanuvchi" }
+  {
+    id: 4,
+    phone: "+99893 158 08 06",
+    name: "Barnoyev Ramziddin",
+    role: "Foydalanuvchi",
+  },
 ];
 
 export default function Users() {
   const [filter, setFilter] = React.useState("");
   const [searchParams, setSearchParams] = useSearchParams();
-  console.log(searchParams, setSearchParams);
-
-  console.log(searchParams.get("filter"));
 
   return (
     <DashboardTemplete>
       <p className="h3">Foydalanuvchilar</p>
-      <p className="text-warning">Yetib kelgan arizalarni kuzatishingiz mumkin</p>
+      <p className="text-warning">
+        Yetib kelgan arizalarni kuzatishingiz mumkin
+      </p>
       <div>
         <p>Users</p>
         <input
@@ -43,7 +57,7 @@ export default function Users() {
             </tr>
           </thead>
           <tbody>
-          {users
+            {users
               .filter((user) => {
                 if (!filter) return true;
                 return user.name.toLowerCase().includes(filter.toLowerCase());

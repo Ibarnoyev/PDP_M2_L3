@@ -11,11 +11,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faEdit } from "@fortawesome/free-solid-svg-icons";
 import { faPen } from "@fortawesome/free-solid-svg-icons/faPen";
 export default function Qoshish() {
-
-  const save = () =>{
+  const save = () => {
     editTask(text);
-    setEdit(false)
-  }
+    setEdit(false);
+  };
   const [isEdit, setEdit] = useState(false);
   const [text, setText] = useState("");
 
@@ -29,6 +28,8 @@ export default function Qoshish() {
   const [price, setPrice] = useState("");
   const [tableData, setTableData] = useState([]);
 
+  // console.log(tableData?.filter((item, index) => ));
+
   const addNew1 = () => {
     if (value.trim() === "") return;
     const newRow = { value, image, price };
@@ -39,8 +40,10 @@ export default function Qoshish() {
     setPrice("");
   };
 
-  const handleRemoveTask = (index) => {
-    dispatch(removeTask(index)); // Dispatch removeTask action
+  const handleRemoveTask = (name) => {
+    // dispatch(removeTask(index)); // Dispatch removeTask action
+    const revomedItem = tableData?.filter((item) => item?.value !== name);
+    setTableData(revomedItem);
   };
 
   const handleEditClick = (index) => {
@@ -172,7 +175,7 @@ export default function Qoshish() {
                         <FontAwesomeIcon
                           icon={faTrash}
                           className="btn btn-danger me-2 ms-2"
-                          onClick={() => handleRemoveTask(index)}
+                          onClick={() => handleRemoveTask(row?.value)}
                         />
                       </td>
                     </tr>

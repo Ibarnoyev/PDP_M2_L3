@@ -5,7 +5,7 @@ import { LoginContext } from "../../App";
 
 export default function Login() {
   const navigate = useNavigate();
-  const { isLogin, setLogin } = useContext(LoginContext);
+  const { setLogin } = useContext(LoginContext);
 
   return (
     <LoginWrapper>
@@ -13,8 +13,8 @@ export default function Login() {
       <button
         className="btn btn-primary"
         onClick={() => {
-            setLogin(true);
-            navigate("/")
+          setLogin(true);
+          navigate("/");
         }}
       >
         Sign in

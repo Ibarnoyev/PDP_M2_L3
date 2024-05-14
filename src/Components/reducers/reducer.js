@@ -11,8 +11,7 @@ const initialState = {
 };
 
 const reducer = (state = initialState, action) => {
-  console.log(action);
-  let meals
+  let meals;
   switch (action.type) {
     case ADD_NEW_MEAL:
       return {

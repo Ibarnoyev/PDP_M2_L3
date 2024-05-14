@@ -17,7 +17,6 @@ const LoginContext = createContext({ isLogin: false, setLogin: () => {} });
 
 function App() {
   const [isLogin, setLogin] = useState(false);
-  console.log(isLogin);
 
   return (
     <Provider store={store}>
@@ -26,14 +25,14 @@ function App() {
           <Routes>
             <Route path="/" element={<Welcome />} />
             <Route path="/login" element={<Login />}></Route>
-            
-                <Route path="/dashboard" element={<Dashboard />} />
-                <Route path="/dashboard/products" element={<Products />} />
-                <Route path="/dashboard/diagramma" element={<Diagramma />} />
-                <Route path="/dashboard/statistika" element={<Statistika />} />
-                <Route path="/dashboard/qoshish" element={<Qoshish />} />
-                <Route path="/dashboard/users" element={<Users />} />
-             
+
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/dashboard/products" element={<Products />} />
+            <Route path="/dashboard/diagramma" element={<Diagramma />} />
+            <Route path="/dashboard/statistika" element={<Statistika />} />
+            <Route path="/dashboard/qoshish" element={<Qoshish />} />
+            <Route path="/dashboard/users" element={<Users />} />
+
             <Route path="*" element={<Page404 />}></Route>
           </Routes>
         </LoginContext.Provider>

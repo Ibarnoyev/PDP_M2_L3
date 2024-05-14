@@ -14,16 +14,16 @@ export const addNew = (value, image, price) => {
 };
 
 export const removeTask = (index) => {
-    return {
-      type: REMOVE_MEAL,
-      payload: index,
-    };
+  return {
+    type: REMOVE_MEAL,
+    payload: index,
   };
+};
 
-  export const editTask = (index, title) => {
-    return {
-      type: EDIT_TASK,
-      payload: { index, title }
-    };
+export const editTask = (index, title) => {
+  console.log(index, title);
+  return {
+    type: EDIT_TASK,
+    payload: { index, title },
   };
-  
+};

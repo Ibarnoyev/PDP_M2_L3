@@ -4,7 +4,6 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import { thunk } from "redux-thunk";
 
 const store = createStore(reducer, composeWithDevTools(applyMiddleware(thunk)));
-console.log(store);
 
 const dispatch = store.dispatch;
 export { dispatch };

@@ -16,7 +16,7 @@ import { LoginContext } from "../../App";
 
 export default function DashboardTemplete({ children }) {
   const navigate = useNavigate();
-  const {login, setLogin} = useContext(LoginContext);
+  const { setLogin } = useContext(LoginContext);
   return (
     <div>
       <DashboardTempleteWrapper>
@@ -130,12 +130,15 @@ export default function DashboardTemplete({ children }) {
               <FontAwesomeIcon icon={faUser} className="py-2"></FontAwesomeIcon>
               <p className="h6 ms-3 btn">Axror</p>
 
-              <button className="btn btn-primary"
-              onClick={() => {
-                setLogin(false)
-                navigate('/')
-              }}
-              >Log out</button>
+              <button
+                className="btn btn-primary"
+                onClick={() => {
+                  setLogin(false);
+                  navigate("/");
+                }}
+              >
+                Log out
+              </button>
             </div>
           </header>
           <main className="p-3">{children}</main>
